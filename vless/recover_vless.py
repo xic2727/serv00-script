@@ -3,22 +3,37 @@ import json
 import subprocess
 import requests
 
-def send_telegram_message(token, chat_id, message):
-    telegram_url = f"https://api.telegram.org/bot{token}/sendMessage"
-    telegram_payload = {
-        "chat_id": chat_id,
-        "text": message,
-        "reply_markup": '{"inline_keyboard":[[{"text":"问题反馈❓","url":"https://t.me/yxjsjl"}]]}'
+def send_feishu_message(message):
+    url = f"{FEISHU_WEBHOOK_URL}"
+    payload = {
+        "msg_type": "post",
+        "content": {
+            "post": {
+                "zh_cn": {
+                    "title": "serv00自动登录脚本",
+                    "content": [
+                        [{
+                            "tag": "text",
+                            "text": message
+                        },
+                        {
+                            "tag": "at",
+                            "user_id": "5c668c8f"
+                        }]
+                    ]
+                }
+            }
+        }
     }
-
-    response = requests.post(telegram_url, json=telegram_payload)
-    print(f"Telegram 请求状态码：{response.status_code}")
-    print(f"Telegram 请求返回内容：{response.text}")
-
-    if response.status_code != 200:
-        print("发送 Telegram 消息失败")
-    else:
-        print("发送 Telegram 消息成功")
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        if response.status_code != 200:
+            print(f"发送消息到feishu失败: {response.text}")
+    except Exception as e:
+        print(f"发送消息到feishu出错: {e}")
 
 # 从环境变量中获取密钥
 accounts_json = os.getenv('ACCOUNTS_JSON')
@@ -59,4 +74,4 @@ for server in servers:
         summary_message += f"\n无法恢复 {host} 上的 vless 服务：\n{e.output.decode('utf-8')}"
 
 # 发送汇总消息到 Telegram
-send_telegram_message(telegram_token, telegram_chat_id, summary_message)
+send_feishu_message(summary_message)
