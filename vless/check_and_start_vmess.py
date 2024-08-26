@@ -76,6 +76,7 @@ def check_and_start_v2ray(hostname, port, username, password):
 
 # 从环境变量中获取密钥
 accounts_json = os.getenv('ACCOUNTS_JSON')
+FEISHU_WEBHOOK_URL = os.getenv('FEISHU_WEBHOOK_URL')
 
 # 检查并解析 JSON 字符串
 try:
