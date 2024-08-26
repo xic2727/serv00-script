@@ -2,7 +2,7 @@ name: 恢复vless服务并发送Telegram消息
 
 on:
   schedule:
-    - cron: '*/20 * * * *'  # 每20分钟执行一次
+    - cron: '*/30 * * * *'  # 每30分钟执行一次
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: 设置Python环境
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # 替换为您需要的 Python 版本
+          python-version: '3.11'  # 替换为您需要的 Python 版本
 
       - name: 安装依赖
         run: |
@@ -26,8 +26,7 @@ jobs:
       - name: 执行Python脚本恢复vless服务并发送Telegram消息
         env:
           ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FEISHU_WEBHOOK_URL: ${{secrets.FEISHU_WEBHOOK_URL}}
         run: |
           python3 vless/recover_vless.py
 
