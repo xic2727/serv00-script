@@ -95,6 +95,6 @@ for server in servers:
     username = server['username']
     password = server['password']
 
-    if server['type'] == "vmess"
+    if server['type'] == "vmess":
         print(f"连接到 {host}...")
         check_and_start_vmess(host, port, username, password)
