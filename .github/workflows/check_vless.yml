@@ -22,11 +22,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests  # 只需安装需要的依赖，此处假设使用 requests 发送 HTTP 请求
+          pip install paramiko
 
       - name: 执行Python脚本恢复vless服务并发送Telegram消息
         env:
           ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
           FEISHU_WEBHOOK_URL: ${{secrets.FEISHU_WEBHOOK_URL}}
         run: |
-          python3 vless/recover_vless.py
+          python3 vless/check_and_start_vless.py
+          python3 vless/check_and_start_vmess.py
+
 
