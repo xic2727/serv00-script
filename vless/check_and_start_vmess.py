@@ -43,7 +43,7 @@ def send_feishu_message(message):
 
 
 # SSH 连接并执行命令
-def check_and_start_v2ray(hostname, port, username, password):
+def check_and_start_vmess(hostname, port, username, password):
     try:
         # 创建SSH客户端对象
         ssh = paramiko.SSHClient()
