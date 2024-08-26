@@ -81,7 +81,7 @@ FEISHU_WEBHOOK_URL = os.getenv('FEISHU_WEBHOOK_URL')
 # 检查并解析 JSON 字符串
 try:
     with open('accounts.json', mode='r', encoding='utf-8') as f:
-        accounts_json = await f.read()
+        accounts_json = f.read()
         servers = json.loads(accounts_json)
 except json.JSONDecodeError:
     error_message = "ACCOUNTS_JSON 参数格式错误"
