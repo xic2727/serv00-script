@@ -61,7 +61,7 @@ def check_and_start_vmess(hostname, port, username, password):
         else:
             print("v2ray 进程未启动。正在启动 v2ray...")
             # 启动 v2ray 进程
-            start_command = 'cd /home/$USER/domains/v2ray && nohup ./v2ray run &'
+            start_command = 'cd /home/$USER/domains/v2ray && nohup ./v2ray run >> ./output.log 2>&1 &'
             ssh.exec_command(start_command)
             print("v2ray 已启动。")
             now_beijing = format_to_iso(datetime.utcnow() + timedelta(hours=8))
