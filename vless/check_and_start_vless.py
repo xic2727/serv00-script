@@ -99,5 +99,5 @@ for server in servers:
     password = server['password']
 
     if server['type'] == "vless":
-        print(f"连接到 {host}...")
+        #print(f"连接到 {host}...")
         check_and_start_vless(host, port, username, password)
