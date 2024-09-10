@@ -34,7 +34,7 @@ jobs:
           ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
           FEISHU_WEBHOOK_URL: ${{secrets.FEISHU_WEBHOOK_URL}}
         run: |
-          python3 vless/check_and_start_vless.py
-          python3 vless/check_and_start_vmess.py
+          #python3 vless/check_and_start_vless.py
+          #python3 vless/check_and_start_vmess.py
 
 
